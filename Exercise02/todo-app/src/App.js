@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 function Banner() {
   return (
-    <h1>Todo Example with React</h1>
+    <h2>Todo Example with React</h2>
   )
 }
 
@@ -56,7 +56,6 @@ function App() {
     <div>
       <Banner/>
       <ToDoFormAndList/>
-      <p>Hello React!</p>
     </div>
   );
 }

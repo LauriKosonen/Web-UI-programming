@@ -2,37 +2,42 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-h1 {
-  background-color: cadetblue;
+h2 {
+  background-color: rgb(119, 85, 33);
   text-align: center;
   color: white;
-  padding: 5px 0;
-  border-radius: 0 0 2px 2px;
+  padding: 5px;
+  border-radius: 30px;
 }
 
 ul {
-  list-style-type: square;
+  list-style-type: disc;
   margin: 20px 0 20px 0;
+  color:rgb(119, 85, 33);
 }
 
 input[type=text] {
-  border: 1px solid #ccc;
+  border: 1px solid #4e3300;
+  background-color: rgb(255, 233, 192);
   padding: 5px;
   width: 300px;
   font-size: 15px;
+  border-radius: 30px;
 }
 
 input[type=submit] {
-  border: 1px solid #ccc;
+  border: 1px solid #634300;
+  background-color: rgb(255, 173, 22);
   margin-left: 15px;
   padding: 5px 15px;
   font-size: 16px;
+  border-radius: 30px;
 }
 
 #root {
   width: 400px;
-  background-color:aliceblue;
-  border-radius: 3px;
+  background-color:rgb(216, 189, 132);
+  border-radius: 30px;
   padding: 0 15px 15px;
   margin: 10px auto;
   border: 1px solid #ddd;
