@@ -4,7 +4,7 @@ It's a mechanic behind the scenes that can prepare multiple versions of the UI s
 
 
 
-### What is a <Suspence> component and give one example where it should be used?
+### What is a Suspence component and give one example where it should be used?
 
 Can be used for data fetching in opinionated frameworks. It handles loading states of components and can display placeholder content while the main content is still loading. So if a large application takes a long time to load up a page or some data, a loading indicator or fallback content can be displayed to show the user that the application is still loading something.
 
