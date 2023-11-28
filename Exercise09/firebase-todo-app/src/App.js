@@ -5,16 +5,19 @@ import {
   getFirestore, 
   collection, 
   getDocs, 
-  setDoc, 
   addDoc, 
   deleteDoc, 
   doc 
 } from 'firebase/firestore/lite';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+
 
 
 const firebaseConfig = {
   apiKey: "AIzaSyCXQyxEn2r2sxFz9gRm0nFIVxFRVTJ1Nrs",
   authDomain: "wuip-todo-6a5dd.firebaseapp.com",
+  
   projectId: "wuip-todo-6a5dd",
   storageBucket: "wuip-todo-6a5dd.appspot.com",
   messagingSenderId: "380185912030",
@@ -29,6 +32,42 @@ function Banner() {
   return (
     <h2>Todo Example with React</h2>
   )
+}
+
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const auth = getAuth();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <label>Email:</label>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <br />
+        <label>Password:</label>
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <br />
+        <button type="submit">Login</button>
+        {error && <p>{error}</p>}
+      </form>
+    </div>
+  );
 }
 
 function ToDoFormAndList() {
@@ -106,11 +145,37 @@ function ToDoFormAndList() {
 }
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <Banner/>
-      <ToDoFormAndList/>
-    </div>
+    <Router>
+      <div>
+        <Banner />
+        <Routes>
+          <Route
+            path="/"
+            element={user ? <ToDoFormAndList /> : <Navigate to="/login" />}
+          />
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
