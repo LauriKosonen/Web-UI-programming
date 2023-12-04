@@ -7,7 +7,7 @@ image: node             # Use node image to build the React app
 build:                  # Build CRA - Create React App
   stage: build          # Name the stages involved in the pipeline
   variables:            # CRA is hosted web server root
-    PUBLIC_URL: /test   # Define subpath - MODIFY YOUR REPO NAME HERE
+    PUBLIC_URL: /wuip-exercises   # Define subpath - MODIFY YOUR REPO NAME HERE
   script:               # Run npm's
     - npm install       # Install all dependencies
     - npm run build     # Build for production  
